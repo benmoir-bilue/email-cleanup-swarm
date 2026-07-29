@@ -1,0 +1,55 @@
+Screen {
+    layers: base overlay;
+}
+
+#tabs {
+    height: 1fr;
+}
+
+DataTable {
+    height: 1fr;
+}
+
+.pane {
+    height: 1fr;
+    border: round $primary;
+    padding: 0 1;
+}
+
+.detail {
+    height: 12;
+    border: round $secondary;
+    padding: 0 1;
+    overflow-y: auto;
+}
+
+.summary {
+    height: auto;
+    max-height: 8;
+    padding: 0 1;
+    color: $text-muted;
+}
+
+#queue-body {
+    height: 1fr;
+    border: round $warning;
+    padding: 1 2;
+}
+
+#queue-progress {
+    height: 1;
+    padding: 0 2;
+    color: $text-muted;
+}
+
+.approved {
+    color: $success;
+}
+
+.rejected {
+    color: $error;
+}
+
+Footer {
+    background: $panel;
+}

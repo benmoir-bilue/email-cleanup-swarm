@@ -1,0 +1,17 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+dist/
+build/
+*.egg-info/
+# Never commit mailbox data or credentials.
+*.db
+*.jsonl
+token.json
+client_secret*.json
+unsub-evidence/
+
+# Your personal filing rules — see filing-rules.example.toml for the template.
+filing-rules.toml

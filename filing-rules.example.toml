@@ -1,0 +1,68 @@
+# Filing rules — your explicit instructions, applied before any model verdict.
+#
+# Copy this file to filing-rules.toml and edit it (that file is gitignored, so your
+# personal rules never get committed). Rules are entirely optional — with no file
+# present, everything is filed by the model swarm alone.
+#
+# Rules are evaluated TOP TO BOTTOM and the FIRST MATCH WINS. Ordering is how you
+# express specificity: put a narrow project rule above a broad "everything from this
+# person" rule so the project mail is claimed first and the rest falls through.
+#
+# Matching:
+#   senders          — substring match against the From address AND display name
+#   subject_contains — substring; terms of 4 characters or fewer are word-bounded,
+#                      so "dam" won't match "Amsterdam"
+#   body_contains    — same, against the message preview
+#   match            — "any" (default) means any criterion is enough; "all" requires
+#                      every listed criterion to hit
+#
+# Check a rule before trusting it:  uv run ecs rules --test
+#
+# Safety: these rules cannot delete a protected record. They outrank every model
+# verdict but still sit below the keep-signal guards, so an over-broad rule costs you
+# a misfiling, never a lost receipt.
+
+# ---------------------------------------------------------------------------
+# Example: a project that spans several senders a model couldn't otherwise link.
+# ---------------------------------------------------------------------------
+[[rule]]
+name = "Zephyr project"
+label = "Projects/Zephyr"
+disposition = "archive"
+senders = [
+    "zephyrpools.example.com",
+    "zephyrsupplies.example.com",
+]
+subject_contains = ["zephyr", "pool project"]
+note = "Two companies working the same job — a model has no way to know that."
+
+# ---------------------------------------------------------------------------
+# Example: financial records worth their own label, even though guards already
+# protect them from deletion.
+# ---------------------------------------------------------------------------
+[[rule]]
+name = "School fees and invoices"
+label = "School/Fees"
+disposition = "archive"
+senders = ["accounts@school.example.edu"]
+subject_contains = ["fee reminder", "invoice"]
+match = "all"
+note = "Guards already keep these; this just files them somewhere findable."
+
+# ---------------------------------------------------------------------------
+# Example: a single high-volume sender you want filed rather than triaged.
+# ---------------------------------------------------------------------------
+[[rule]]
+name = "Rideshare receipts"
+label = "Finance/Receipts"
+disposition = "archive"
+senders = ["noreply@rideshare.example.com"]
+
+# ---------------------------------------------------------------------------
+# Example: a person whose mail should land in its own folder.
+# ---------------------------------------------------------------------------
+[[rule]]
+name = "A specific correspondent"
+label = "People/Ana"
+disposition = "archive"
+senders = ["ana@example.com"]

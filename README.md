@@ -9,6 +9,15 @@ mailing-list mail, and it will cluster that mail, decide what's safe to file, ar
 or trash, draft an unsubscribe pass, and show you the whole plan before touching
 anything.
 
+> **Disclaimer.** This is a personal project, shared as-is, not a polished product.
+> It mutates and deletes mail in a real Gmail account via the Gmail API and spends
+> real money on Anthropic API calls. Nothing here is guaranteed to be bug-free, and
+> the guardrails described below (guards, precedence, dry runs) reduce risk but don't
+> eliminate it. You should be comfortable reading Python, reviewing what a CLI is
+> about to do before running it with `--apply`, and recovering if something doesn't
+> go the way you expected, before pointing this at a mailbox you care about. Use at
+> your own risk — see [LICENSE](LICENSE), which disclaims warranty and liability.
+
 ## What it does
 
 - **Indexes** your inbox and clusters ~7,000 messages into a few hundred sender/topic
@@ -344,3 +353,8 @@ anywhere in the test suite. Coverage is concentrated where a bug would lose mail
 undo planner, guard evaluation and cluster roll-up, plan precedence, per-model request
 shapes (a wrong shape is a runtime 400 mid-batch), and an end-to-end pipeline over a
 synthetic mailbox built with the shapes that actually stress the design.
+
+## License
+
+[MIT](LICENSE) — provided as-is, with no warranty. See the disclaimer at the top of
+this file before running it against a mailbox you care about.

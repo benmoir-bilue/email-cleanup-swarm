@@ -2,6 +2,7 @@
 name = "email-cleanup-swarm"
 version = "0.1.0"
 description = "Agentic inbox cleanup: tiered model swarm over a Gmail inbox, with human approval on every irreversible action."
+license = "MIT"
 requires-python = ">=3.12"
 dependencies = [
     "anthropic>=0.116.0",
